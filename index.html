@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Neon Jump 霓虹跳跃 — 按住蓄力跳平台 | 免费 HTML5 小游戏</title>
+  <meta name="description" content="Neon Jump 霓虹跳跃：按住蓄力、松手起跳，落在下一个霓虹平台得分，落空即结束。单指操作，手机电脑都能玩，免费 HTML5 小游戏。" />
+  <meta property="og:title" content="Neon Jump 霓虹跳跃 — 按住蓄力跳平台" />
+  <meta property="og:description" content="按住蓄力，松手起跳。落在平台上 +1，完美落点 +2，落空即结束。单指就能玩。" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%2300f0ff'/></svg>" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">NEON <span>JUMP</span> <em>霓虹跳跃</em></div>
+      <div class="top-actions">
+        <button id="btn-mute" type="button" aria-label="静音">🔊</button>
+        <button id="btn-pause" type="button" aria-label="暂停">⏸</button>
+      </div>
+    </header>
+
+    <main id="stage">
+      <div id="game-container"></div>
+
+      <!-- HUD -->
+      <div id="hud">
+        <div class="score-box"><span id="score">0</span><label>分数</label></div>
+        <div class="best-box">最高 <span id="best">0</span></div>
+      </div>
+
+      <!-- Power bar -->
+      <div id="power-wrap" hidden>
+        <div id="power-fill"></div>
+        <span id="power-label">蓄力中…松手起跳</span>
+      </div>
+
+      <!-- Start overlay -->
+      <div id="overlay-start" class="overlay">
+        <h1>NEON JUMP</h1>
+        <p class="sub">霓虹跳跃 · 按住蓄力跳平台</p>
+        <div class="how">
+          <p>👆 <b>按住</b>屏幕蓄力，力度条越满跳得越远</p>
+          <p>🎯 <b>松手</b>起跳，落在下一个平台 +1 分</p>
+          <p>✨ 落在正中心 <b>PERFECT +2</b>，落空即结束</p>
+        </div>
+        <button id="btn-start" type="button">开始游戏</button>
+        <p class="hint">手机单指 / 鼠标按住 / 空格键 都可以玩</p>
+      </div>
+
+      <!-- Game over overlay -->
+      <div id="overlay-over" class="overlay" hidden>
+        <h2>游戏结束</h2>
+        <p id="new-record" class="record" hidden>🎉 新纪录！</p>
+        <div class="final"><span id="final-score">0</span><label>本局得分</label></div>
+        <p class="final-best">最高分 <span id="final-best">0</span></p>
+        <button id="btn-restart" type="button">再来一局</button>
+      </div>
+
+      <!-- Paused overlay -->
+      <div id="overlay-pause" class="overlay" hidden>
+        <h2>已暂停</h2>
+        <button id="btn-resume" type="button">继续</button>
+      </div>
+    </main>
+
+    <section class="about">
+      <h2>怎么玩</h2>
+      <p>霓虹跳跃是一款单指街机小游戏：按住屏幕蓄力，松手让小球跳向下一个霓虹平台。力度决定跳多远，落在平台正中心有 PERFECT 加分，掉下去游戏就结束。平台会越变越窄、间距越来越大，看看你能跳多远。</p>
+      <h2>常见问题</h2>
+      <details><summary>手机上怎么玩？</summary><p>单指按住屏幕蓄力，松手起跳。不用滑动，不用双指，躺着也能玩。已做防误触：按住时页面不会滚动，也不会弹出长按菜单。</p></details>
+      <details><summary>电脑上怎么玩？</summary><p>鼠标按住左键蓄力、松开起跳，或者按住空格键、松开起跳，效果一样。</p></details>
+      <details><summary>Perfect 怎么判定？</summary><p>落点与平台中心距离小于 12 像素就是 Perfect，一次 +2 分并有星爆特效和震动反馈。</p></details>
+      <details><summary>最高分存在哪里？</summary><p>只存在你自己浏览器的 localStorage 里，不上传、不登录，换设备不会同步。</p></details>
+    </section>
+    <footer>Neon Jump · Phaser 3 HTML5 · 免费游玩</footer>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
