@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://neon-jump.pages.dev/sitemap.xml
