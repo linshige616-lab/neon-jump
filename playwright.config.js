@@ -2,10 +2,12 @@ import { defineConfig, devices } from '@playwright/test'
 
 // Local Chrome for Testing (playwright's CDN download is flaky here;
 // the binary was fetched directly from storage.googleapis.com).
-// Override with PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH when a managed
-// browser is available.
-const chromePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH ||
-  '/home/hatch/workspace/.chrome-for-test/chrome-linux64/chrome'
+// Only override the browser binary when the env var is set: on CI the
+// workflow installs Playwright's managed Chromium and the config must
+// NOT point at this VM's local path (that broke the first Actions run:
+// executable doesn't exist on the runner).
+// Local runs: export PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/home/hatch/workspace/.chrome-for-test/chrome-linux64/chrome
+const chromePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined
 
 export default defineConfig({
   testDir: './tests',
@@ -14,7 +16,7 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:4173',
     trace: 'on-first-retry',
-    launchOptions: { executablePath: chromePath }
+    ...(chromePath ? { launchOptions: { executablePath: chromePath } } : {})
   },
   webServer: {
     command: 'npm run preview',
